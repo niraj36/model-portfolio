@@ -17,6 +17,6 @@ def from_barchart():
     if status == 200:
         prices = pd.read_json(json.dumps(response.json()['results']))
         return prices[['symbol', 'lastPrice']]
-    else:
+    else: # TODO best way to handle errors?
         error = status
         return error
