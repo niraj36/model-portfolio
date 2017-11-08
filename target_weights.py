@@ -1,12 +1,6 @@
-import pandas as pd
-
-
 def equal_weight(marked_portfolio):
-    # TODO calculate the total value of all etf holdings by portfolio
-    portfolio_value = pd.DataFrame(marked_portfolio)
-    # TODO calculate the number of etf holdings by portfolio
-    position_count = 10
-    # TODO calculate the expected value of each holding by portfolio if equal weighted
-    target_value = marked_portfolio['Value'] * 100
-    # TODO return the target values of each holding by portfolio
+    target_value = marked_portfolio
+    target_value['PortfolioValue'] = target_value['Value'].groupby(target_value['Portfolio']).transform('sum')
+    target_value['PortfolioHoldingCount'] = target_value.groupby(target_value['Portfolio'])['Symbol'].transform('count')
+    target_value['TargetValue'] = target_value['PortfolioValue'] / target_value['PortfolioHoldingCount']
     return target_value

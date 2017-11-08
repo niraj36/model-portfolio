@@ -1,3 +1,5 @@
+import json
+import requests
 import pandas as pd
 
 
@@ -7,11 +9,14 @@ def from_sigfig_stale_prices():
         .drop_duplicates(subset=['Symbol', 'Last'], keep='first')
     return prices
 
-# TODO add function to pull latest price from barchart api
-'''
+
 def from_barchart():
-    # TODO parse api string components into token files in _data and update code to generate string from files
-    prices = pd.read_json('http://marketdata.websol.barchart.com/getQuote.json?apikey=<ADD-KEY>&symbols=USMV,EEMV', orient='records')
-    return prices
-    print(prices)
-'''
+    params = open('C:/_data/BarchartApiKeyAndSymbols.txt', 'r').read()
+    response = requests.get('http://marketdata.websol.barchart.com/getQuote.json', params=params)
+    status = response.status_code
+    if status == 200:
+        prices = pd.read_json(json.dumps(response.json()['results']))
+        return prices[['symbol', 'lastPrice']]
+    else:
+        error = status
+        return error
