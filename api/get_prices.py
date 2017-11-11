@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 
 
+# Gets prices from last holdings report
 def from_sigfig_stale_prices():
     return_fields = ['Symbol', 'Last']
     prices = pd.read_csv('C:/_data/Portfolios.csv', usecols=return_fields)\
@@ -10,10 +11,12 @@ def from_sigfig_stale_prices():
     return prices
 
 
+# Gets last traded price
 def from_barchart():
     params = open('C:/_data/BarchartApiKeyAndSymbols.txt', 'r').read()
     response = requests.get('http://marketdata.websol.barchart.com/getQuote.json', params=params)
     status = response.status_code
+
     if status == 200:
         prices = pd.read_json(json.dumps(response.json()['results']))
         return prices[['symbol', 'lastPrice']]

@@ -5,6 +5,7 @@ from api.post_trades import *
 import pandas as pd
 import numpy as np
 
+
 # Gather input data
 etfs = pd.read_json('C:/_data/ETFs.txt') # investments subject to the rebalance
 holdings = from_sigfig()
