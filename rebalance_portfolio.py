@@ -1,10 +1,9 @@
-from api.get_holdings import *
-from api.get_prices import *
-from target_weights import *
-from api.post_trades import *
-import pandas as pd
 import numpy as np
+from data_access.api.get_holdings import *
+from data_access.api.post_trades import *
 
+from data_access.api.get_prices import *
+from target_weights import *
 
 # Gather input data
 etfs = pd.read_json('C:/_data/ETFs.txt') # investments subject to the rebalance
