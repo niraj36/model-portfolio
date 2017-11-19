@@ -4,6 +4,7 @@ import datetime
 
 Base = declarative_base()
 
+
 class Investment(Base):
     __tablename__ = 'Investment'
     Id = Column(Integer, primary_key=True)
@@ -12,6 +13,7 @@ class Investment(Base):
 
     def __repr__(self):
         return 'Id: {}, Ticker {}, Description {}'.format(self.Id, self.Ticker, self.Description)
+
 
 class MarketDataType(Base):
     __tablename__ = 'MarketDataType'
