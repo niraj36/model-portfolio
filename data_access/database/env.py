@@ -17,7 +17,7 @@ fileConfig(config.config_file_name)
 # target_metadata = mymodel.Base.metadata
 import os, sys
 sys.path.append(os.getcwd())
-from test_alembic.models import Base
+from database.models import Base
 target_metadata = Base.metadata
 ##target_metadata = None
 

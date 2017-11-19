@@ -14,6 +14,7 @@ class Investment(Base):
         return 'Id: {}, Ticker {}, Description {}'.format(self.Id, self.Ticker, self.Description)
 
 class MarketDataType(Base):
+    __tablename__ = 'MarketDataType'
     Id = Column(Integer, primary_key=True)
     Description = Column(String, nullable=False)
 
@@ -25,12 +26,11 @@ class MarketData (Base):
     __tablename__ = 'MarketData'
     Id = Column(Integer, primary_key=True)
     InvestmentId = Column(Integer, ForeignKey(Investment.Id), nullable=False)
-    MarketDataTypeId = Column(Integer, ForeignKey(MarketData.Id), nullable=False)
-    Value = Column(float, nullable=False)
+    MarketDataTypeId = Column(Integer, ForeignKey(MarketDataType.Id), nullable=False)
+    Value = Column(Float, nullable=False)
     Source = Column(String, nullable=False)
     CreateDate = Column(DateTime, default=datetime.datetime.utcnow())
 
     def __repr__(self):
         return 'Id {}, InvestmentId {}, MarketDataTypeId {}, Value {}, Source {}, CreateDate{}'\
             .format(self.Id, self.InvestmentId, self.MarketDataTypeId, self.Value, self.Source, self.CreateDate)
-    
