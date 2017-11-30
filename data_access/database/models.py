@@ -29,9 +29,10 @@ class MarketData (Base):
     Id = Column(Integer, primary_key=True)
     InvestmentId = Column(Integer, ForeignKey(Investment.Id), nullable=False)
     MarketDataTypeId = Column(Integer, ForeignKey(MarketDataType.Id), nullable=False)
+    EffectiveDate = Column(DateTime, nullable=False)
     Value = Column(Float, nullable=False)
     Source = Column(String, nullable=False)
-    CreateDate = Column(DateTime, default=datetime.datetime.utcnow())
+    CreateDate = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
 
     def __repr__(self):
         return 'Id {}, InvestmentId {}, MarketDataTypeId {}, Value {}, Source {}, CreateDate{}'\
