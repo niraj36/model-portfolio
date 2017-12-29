@@ -47,5 +47,4 @@ def from_yahoo_csv_adjusted_close(file):
 
     # insert market data
     data.to_sql('MarketData', engine, if_exists='append', index=false)
-
     return
