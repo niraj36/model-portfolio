@@ -6,6 +6,7 @@ import datetime
 from data_access.database import models
 
 
+# TODO Add error handling on this function
 def from_yahoo_csv_adjusted_close(file):
     load_fields = ['Date', 'Adj Close']
     data = pd.read_csv(file, usecols=load_fields)
@@ -47,5 +48,4 @@ def from_yahoo_csv_adjusted_close(file):
 
     # insert market data
     data.to_sql('MarketData', engine, if_exists='append', index=false)
-
     return
