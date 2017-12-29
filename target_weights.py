@@ -8,6 +8,6 @@ def equal_weight(marked_portfolio):
     # Calculate the number of non cash holdings by portfolio
     target_value['PortfolioHoldingCount'] = target_value.groupby(target_value['Portfolio'])['symbol'].transform('count')
 
-    # Calculate the target market value of each holding within the portfolio
+    # Calculate the target market value of each holding within the portfolio net of trade fee
     target_value['TargetValue'] = (target_value['PortfolioValue'] / target_value['PortfolioHoldingCount']) - 10
     return target_value
